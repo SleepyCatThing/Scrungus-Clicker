@@ -31,7 +31,8 @@ class buttons:
         # pseudo code because I ran out of time. Hopefully I will understand what I meant later!
         click upgrades button = tk.button(master=win, command=popuptypething)
         click_upgrades=popup_type_thing(master=win)
-        click_upgrade_1=tk.Button(master=click_upgrade_window, command=scorer.click_mod_upgrade(1))
+   
+# DO NOT DO THIS HERE I THINK, DO IT IN MAIN, KEEP THIS TO BACKEND AND MODULAR     click_upgrade_1=tk.Button(master=click_upgrade_window, command=scorer.click_mod_upgrade(1))
         click_upgrade_1.grid(row=0, column=0)
         
         win.mainloop()
