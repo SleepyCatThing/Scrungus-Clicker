@@ -8,39 +8,50 @@ import tkinter as tk
 # TODO add click and passive mult
 # TODO more
 class scorer:
-    def __init__(self, click_mod, passive):
+    def __init__(self, click_mod, passive_mod, click_mult, passive_mult):
         self.score=tk.IntVar()
         self.score.set(0)
         self.click_mod=click_mod
-        self.passive=passive
-    
+        self.passive_mod=passive_mod
+        self.passive_mult=passive_mult
+        self.click_mult=click_mult
+        
+        
     def click_mod_upgrade(self, a):
         self.click_mod+=a
     
-    def passive_upgrade(self, a):
-        self.passive+=a
+    def passive_mod_upgrade(self, a):
+        self.passive_mod+=a
+    
+    def click_mult_upgrade(self, a):
+        self.click_mult*=a
+        
+    def passive_mult_upgrade(self, a):
+        self.passive_mod*=a
+    
     
     def score_button(self):
-        self.score.set(self.score.get()+self.click_mod)
+        self.score.set(self.score.get()+(self.click_mod*self.click_mult))
     
 # TODO buttons functional
 # TODO window functional
 class buttons:
-    def upgrade_window(self):
+    def upgrade(self, x, type):
+        
+        
+        
+        self.type= {
+            "click_mod" : scorer.click_mod_upgrade(x),
+            "click_mult" : scorer.click_mult_upgrade(x),
+            "passive_mod" : scorer.passive_mod_upgrade(x),
+            "passive_mult" : scorer.passive_mult_upgrade(x)
+            }
+        
         win = tk.Tk()
-        # pseudo code because I ran out of time. Hopefully I will understand what I meant later!
-        click upgrades button = tk.button(master=win, command=popuptypething)
-        click_upgrades=popup_type_thing(master=win)
-   
-# DO NOT DO THIS HERE I THINK, DO IT IN MAIN, KEEP THIS TO BACKEND AND MODULAR     click_upgrade_1=tk.Button(master=click_upgrade_window, command=scorer.click_mod_upgrade(1))
-        click_upgrade_1.grid(row=0, column=0)
+        
+        
+        upgrade_button = tk.Button(master=win, command=self.type[type])
+
         
         win.mainloop()
             
-    
-    
-    def upgrade(self, b, type):
-        if (type=="cm"):
-            scorer.click_mod_upgrade(b)
-        elif (type=="passive"):
-            scorer.passive_upgrade(b)
