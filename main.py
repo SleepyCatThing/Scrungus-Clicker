@@ -1,32 +1,26 @@
-# Sets everything up to actually run and does it!
-# TODO make shit work
-# TODO implement saving eventually
-# TODO reset button
-# TODO dev options???
-# TODO actually implement the game button stuff HERE
-# TODO implement more stuff appearing through progression via events
-
 import tkinter as tk
 from tkinter import ttk
-import events as ev
+import scrungle as scrung
 
+main_game_window = tk.Tk()
 
-window = tk.Tk()
-window.title("Scrungus Clicker")
-window.config(width=800, height=600)
-
-
-# How your 
-score = tk.IntVar()
-click_mod=1
-passive=0
-
-scoreboard=ev.scorer(score, click_mod, passive)
-
-score_display = ttk.Label(master=window, textvariable=score)
+# initializing shit
+scr=scrung.score_keeping_system(0, 1, 1, 1, 1)
+upgrades=scrung.upgrades()
+score_display=tk.Label(master = main_game_window, textvariable = scr.score)
 score_display.grid(row=0, column=1)
+click_button = tk.Button(master = main_game_window, text="Click me!", command = lambda: scr.click())
+click_button.grid(row=0, column=0)
 
-# this probably won't work, need to figure out how to set up tk window in events to hold upgrades!
-upgrade_button=tk.Button(master=window, command=ev.buttons)
+# upgrade button so i don't forget how to make them
+upgrade_button_template=tk.Button(master=upgrades.window, command=lambda:scr.click_mod_upgrade(1))
 
-tk.mainloop()
+# SHOULD create a button that will open a new window. Does not yet
+upgrade_button=tk.Button(master=main_game_window, text="Upgrades", command=lambda:upgrades.window_open())
+upgrade_button.grid(row=1, column=0)
+
+
+main_game_window.mainloop()
+
+
+
